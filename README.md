@@ -1,10 +1,10 @@
-# API Rest para Procesamiento de Imágenes
+# API Rest to follow the stocks updates on the market
 
-Este proyecto es una API Rest desarrollada en Node.js que permite procesar imágenes, almacenarlas en un servicio en la nube y guardar información relevante en una base de datos MongoDB. La API también permite buscar registros de imágenes entre fechas y obtener la cantidad de imágenes procesadas agrupadas por horas. Además, cuenta con un sistema de registro y login para autenticar a los usuarios.
+This project is meant to be a stock tracker and brokerage simulator where a logged user can see in real time a stock price changing over time and buy it if preferred.
 
-## Arquitectura Hexagonal
+## Hexagonal Architecture
 
-El proyecto sigue la arquitectura hexagonal, también conocida como arquitectura de puertos y adaptadores, que separa las preocupaciones y mantiene la independencia de los componentes del sistema.
+Well known as well as adapters and ports architecture the project follows a hexa architecture, this allows to mantain the independence of the system components.
 
 ## Requisitos
 
