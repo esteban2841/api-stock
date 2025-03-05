@@ -6,43 +6,34 @@ This project is meant to be a stock tracker and brokerage simulator where a logg
 
 Well known as well as adapters and ports architecture the project follows a hexa architecture, this allows to mantain the independence of the system components.
 
-## Requisitos
+## Constrains
 
 - Node.js 23.0.0
 - MongoDB
 
-## Paquetes Utilizados
+## Used packages
 
-- `aws-sdk`: ^2.1692.0
 - `bcryptjs`: ^2.4.3
 - `body-parser`: ^1.20.3
 - `cors`: ^2.8.5
 - `dotenv`: ^16.4.5
 - `express`: ^4.21.1
 - `jsonwebtoken`: ^9.0.2
-- `luxon`: ^3.5.0
-- `moment`: ^2.30.1
-- `moment-timezone`: ^0.5.46
 - `mongoose`: ^8.8.3
-- `multer`: ^1.4.5-lts.1
 - `nodemon`: ^3.1.7
-- `sharp`: ^0.33.5
 
-## Descripción del Proyecto
+## Project description
 
-### Funcionalidades
+### Functionalities
 
-1. **Procesar Imágenes**:
-   - Recibir una imagen en formato JPG o JPEG.
-   - Convertir la imagen a formato PNG.
-   - Guardar la imagen (PNG) en un servicio en la nube (AWS S3).
-   - Guardar en una colección de MongoDB:
-     - Fecha y hora de subida.
-     - Nombre de la persona que la subió.
-     - URL de la imagen guardada.
+1. **Authentication flow**:
+   - Register a user encrypting password using JWT.
+   - Create the user reference in Mongo DB database.
+   - Retrieving user from DB.
+   - Loging confirming the user password whether is valid or not:
 
-2. **Buscar Registros de Imágenes entre Fechas**:
-   - Permite buscar imágenes subidas entre dos fechas específicas.
+2. **Requesting to Alpha vantage stocks**:
+   - Allows the user to retrieve the history movement of a stock price in a range of 15 min passing the symbol of the wanted stock.
 
 3. **Obtener Cantidad de Imágenes Procesadas Agrupadas por Horas**:
    - Permite obtener la cantidad de imágenes procesadas agrupadas por horas en una fecha específica.
