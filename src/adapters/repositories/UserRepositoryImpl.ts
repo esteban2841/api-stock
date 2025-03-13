@@ -51,7 +51,7 @@ class UserRepositoryImpl extends UserRepository {
         }
         
         console.log("TCL: UserRepositoryImpl -> user", user)
-        const modifiedUser = User.findOneAndReplace({_id:user._id}, {...user})
+        const modifiedUser = User.findOneAndUpdate({_id:user._id}, {...user})
         console.log("TCL: UserRepositoryImpl -> modifiedUser", modifiedUser)
 
       return user

@@ -20,6 +20,21 @@ class UserController {
       res.status(500).send("Server error");
     }
   }
+  static async getUser(req: Request, res: Response): Promise<void> {
+    const { 
+      email
+    } = req.body;
+    console.log("TCL: UserController -> email", email)
+    try {
+      const userModified = await userService.getUser(
+        email
+      );
+      res.json(userModified);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Server error");
+    }
+  }
 
 }
 

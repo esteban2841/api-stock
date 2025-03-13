@@ -18,6 +18,20 @@ class UserService {
 
     return user;
   }
+  static async getUser(
+    email: string
+  ) {
+		console.log("TCL: UserService -> email", email)
+    const userRepository = new UserRepositoryImpl();
+    let user = await userRepository.findByEmail(email);
+    if (!user) {
+      throw new Error("User doesn't exists");
+    }
+    
+    console.log("TCL: UserService -> user", user)
+
+    return user;
+  }
 
 }
 

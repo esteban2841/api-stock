@@ -15,9 +15,18 @@ class AuthService {
     if (user) {
       throw new Error("User already exists");
     }
-    user = new User({ name, username, password, balance: 10000, email });
+    user = new User({ name, username, password, balance: 10000, email, holdings:[
+      {
+        symbolUnits: 1.52,
+        date: '2025-03-13T15:30:09.854Z',
+        time: 17418798098,
+        close: '601.5850',
+        symbol: 'AAPL'
+      }
+    ] });
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
+		console.log("TCL: AuthService -> user", user)
     await userRepository.save(user);
     const payload = { user: { id: user._id } };
     const token = generateToken(payload, 360000);
@@ -28,6 +37,7 @@ class AuthService {
   static async login(email: string, password: string) {
     const userRepository = new UserRepositoryImpl();
     let user = await userRepository.findByEmail(email);
+		console.log("TCL: AuthService -> staticlogin -> user", user)
     if (!user) {
       throw new Error("Invalid credentials");
     }
