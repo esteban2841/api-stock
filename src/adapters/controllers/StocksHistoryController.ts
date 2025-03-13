@@ -20,9 +20,7 @@ class StockHistoryController {
   static async generateSymbolPrice(req: Request, res: Response): Promise<void> {
     try {
       const {symbol} = req.params
-			console.log("TCL: StockHistoryController -> symbol", symbol)
       const symbolRes = await StockHistoryService.generateSymbolPrice(symbol)
-			console.log("TCL: StockHistoryController -> symbolRes", symbolRes)
 
       res.json(symbolRes);
     } catch (err) {

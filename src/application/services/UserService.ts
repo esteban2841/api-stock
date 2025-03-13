@@ -11,8 +11,8 @@ class UserService {
   ) {
     const userRepository = new UserRepositoryImpl();
     let user = await userRepository.stockPurchase(userToAddStock, currentSymbolPrice, staleQuantity);
-    if (user) {
-      throw new Error("User already exists");
+    if (!user) {
+      throw new Error("User doesn't exists");
     }
 
 

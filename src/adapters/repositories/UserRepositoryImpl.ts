@@ -13,27 +13,50 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   async save(user: UserInterface): Promise<UserInterface> {
-     const newUser = new User(user);
-     return await newUser.save();
+    const newUser = new User(user);
+    return await newUser.save();
   }
 
   async stockPurchase(user: UserInterface, currentSymbolPrice: StockType, staleQuantity: number): Promise<UserInterface> {
-     const requestedUser = await this.findByEmail(user.email)
-     if(requestedUser){
-       const {holdings} = requestedUser
+    console.log("TCL: UserRepositoryImpl -> user: UserInterface, currentSymbolPrice: StockType, staleQuantity: number", user, currentSymbolPrice, staleQuantity)
+    if(user){
+      console.log("TCL: UserRepositoryImpl -> user", user)
+      const {holdings} = user
+      user.balance -= staleQuantity
 
-       const unitsOfSymbolAdquired = staleQuantity / Number(currentSymbolPrice.close)
+      const unitsOfSymbolAdquired = staleQuantity / Number(currentSymbolPrice.close)
+      const holdingToAdd = [...holdings || []].find(holding=>{
+        const newHolding = holding.symbol == currentSymbolPrice.symbol
+        holding.symbolUnits += unitsOfSymbolAdquired
+        return newHolding
+      })
+      console.log("TCL: UserRepositoryImpl -> holdingToAdd", holdingToAdd)
+      
+      if(!holdingToAdd){
+        holdings?.length ? holdings?.push({
+          symbolUnits: unitsOfSymbolAdquired,
+          date: currentSymbolPrice.date,
+          time: currentSymbolPrice.time,
+          close: currentSymbolPrice.close,
+          symbol: currentSymbolPrice.symbol,
+          }) :
+          user.holdings = [{
+            symbolUnits: unitsOfSymbolAdquired,
+            date: currentSymbolPrice.date,
+            time: currentSymbolPrice.time,
+            close: currentSymbolPrice.close,
+            symbol: currentSymbolPrice.symbol,
+          }]
+          console.log("TCL: UserRepositoryImpl -> user", user)
+        }
+        
+        console.log("TCL: UserRepositoryImpl -> user", user)
+        const modifiedUser = User.findOneAndReplace({_id:user._id}, {...user})
+        console.log("TCL: UserRepositoryImpl -> modifiedUser", modifiedUser)
 
-       const holdingToAdd = [...holdings || []].find(holding=>{
-         const newHolding = holding.symbol == currentSymbolPrice.symbol
-         holding.symbolUnits += unitsOfSymbolAdquired
-         return newHolding
-        })
-        console.log("TCL: UserRepositoryImpl -> holdingToAdd", holdingToAdd)
-
-       return requestedUser
-     }
-     return user
+      return user
+    }
+    return user
   }
 
 

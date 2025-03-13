@@ -6,7 +6,7 @@ export interface UserInterface {
   username: string;
   password: string;
   email: string;
-  balance?: number
+  balance: number
   holdings?: SymbolAdquired[]
 }
 
