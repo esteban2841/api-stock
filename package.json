@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon --exec ts-node src/infrastructure/server.ts",
     "build": "tsc",
-    "start": "node dist/infrastructure/server.js"
+    "start": "node dist/infrastructure/server.js",
+    "socket": "node src/infrastructure/socket.js",
+    "dev:all": "concurrently \"npm run dev\" \"npm run socket\""
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,7 @@
     "axios": "^1.8.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
+    "concurrently": "^9.1.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
@@ -22,7 +25,8 @@
     "luxon": "^3.5.0",
     "mongoose": "^8.8.3",
     "nodemon": "^3.1.7",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "socket.io": "^4.8.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

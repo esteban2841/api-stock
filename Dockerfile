@@ -2,7 +2,7 @@
 FROM node:21.0.0
 
 # Establece el directorio de trabajo en el contenedor
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copia el archivo package.json y package-lock.json (si existe)
 COPY package*.json ./
@@ -20,4 +20,4 @@ RUN npm run build
 EXPOSE 3001
 
 # Comando para iniciar la aplicación
-CMD ["node", "dist/infrastructure/server.js"]
+CMD ["node", "/app/dist/infrastructure/server.js"]

@@ -7,6 +7,7 @@ const userSchema = new Schema<UserInterface>({
   password: { type: String, required: true },
   email: { type: String, required: true },
   balance: { type: Number, required: false },
+  holdings: { type: Array, required: false },
 });
 
 export default model<UserInterface>("User", userSchema);

@@ -7,13 +7,24 @@ class StockHistoryController {
   static async fetchStockData(req: Request, res: Response): Promise<void> {
     try {
       const {symbol} = req.params
-			console.log("TCL: StockHistoryController -> symbol", symbol)
       const stocks = await StockHistoryService.fetchStockData(symbol)
-			console.log("TCL: StockHistoryController -> stocks", stocks)
 
       await Stock.deleteMany()
       await Stock.insertMany(stocks)
-      res.json({ stocks });
+      res.json(stocks);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Server error");
+    }
+  }
+  static async generateSymbolPrice(req: Request, res: Response): Promise<void> {
+    try {
+      const {symbol} = req.params
+			console.log("TCL: StockHistoryController -> symbol", symbol)
+      const symbolRes = await StockHistoryService.generateSymbolPrice(symbol)
+			console.log("TCL: StockHistoryController -> symbolRes", symbolRes)
+
+      res.json(symbolRes);
     } catch (err) {
       console.error(err);
       res.status(500).send("Server error");

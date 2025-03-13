@@ -7,13 +7,21 @@ export interface UserInterface {
   password: string;
   email: string;
   balance?: number
+  holdings?: SymbolAdquired[]
 }
 
 export interface StockHistory {
-  stocks: Stock[]
+  stocks: StockType[]
 }
 
-export interface Stock{
+export interface SymbolAdquired{
+  date?: Date
+  time?: number
+  close: string
+  symbolUnits: number
+  symbol: string
+}
+export interface StockType{
   date?: Date
   time?: number
   open: string

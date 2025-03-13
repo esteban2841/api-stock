@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
-import { Stock } from "../../infrastructure/types/index";
+import { StockType } from "../../infrastructure/types/index";
 
-const StockSchema = new Schema<Stock>({
+const StockSchema = new Schema<StockType>({
   date: { type: Date, required: true },
   time: { type: Number, required: true, unique: true },
   open: { type: String, required: true },
@@ -10,4 +10,4 @@ const StockSchema = new Schema<Stock>({
   symbol: { type: String, required: true },
 });
 
-export default model<Stock>("Stock", StockSchema);
+export default model<StockType>("Stock", StockSchema);

@@ -1,4 +1,4 @@
-import { Stock } from "infrastructure/types"
+import { StockType } from "infrastructure/types"
 
 export const fetchStocks = (stocks: any, symbol?: string)=> {
     const currentSymbol = stocks['Meta Data']['2. Symbol'] || symbol
@@ -16,12 +16,12 @@ export const fetchStocks = (stocks: any, symbol?: string)=> {
 }
 
 
-function transformApiStockData(data: any, date: string): Stock | null {
+function transformApiStockData(data: any, date: string): StockType | null {
     if (!data || typeof data !== 'object') {
         return null;
     }
 
-    const transformed: Stock = {
+    const transformed: StockType = {
         date: new Date(date),
         time: new Date(date).getTime(),
         open: '',
