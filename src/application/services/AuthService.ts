@@ -26,7 +26,6 @@ class AuthService {
     ] });
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
-		console.log("TCL: AuthService -> user", user)
     await userRepository.save(user);
     const payload = { user: { id: user._id } };
     const token = generateToken(payload, 360000);
@@ -37,7 +36,6 @@ class AuthService {
   static async login(email: string, password: string) {
     const userRepository = new UserRepositoryImpl();
     let user = await userRepository.findByEmail(email);
-		console.log("TCL: AuthService -> staticlogin -> user", user)
     if (!user) {
       throw new Error("Invalid credentials");
     }

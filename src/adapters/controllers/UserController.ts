@@ -24,7 +24,6 @@ class UserController {
     const { 
       email
     } = req.body;
-    console.log("TCL: UserController -> email", email)
     try {
       const userModified = await userService.getUser(
         email

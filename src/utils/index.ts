@@ -6,7 +6,6 @@ export const fetchStocks = (stocks: any, symbol?: string)=> {
     const normalizeStocks = stocksArray.map(stock=>{
         const stockInfo = stock[1]
         const values = transformApiStockData(stockInfo, stock[0])
-		// console.log("TCL: fetchStocks -> stockInfo", Object.values(stockInfo))
         return {
             ...values,
             symbol: currentSymbol

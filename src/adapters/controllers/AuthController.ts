@@ -21,7 +21,6 @@ class AuthController {
 
   static async login(req: Request, res: Response): Promise<void> {
     const { email, password } = req.body;
-		console.log("TCL: AuthController -> email, password", email, password)
     try {
       const token = await AuthService.login(email, password);
       res.json({ token });

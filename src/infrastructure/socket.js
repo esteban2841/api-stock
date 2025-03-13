@@ -17,7 +17,6 @@ const io = new Server(httpServer, {
 
     // Escuchar mensajes del cliente
     socket.on('getStockPrice', async () => {
-      console.log("TCL: getStockPrice")
       const symbol = 'AAPL'; // Fixed symbol
       const newSymbolPrice = await axios.get(`${process.env.BACKEND_URI}/api/stock/generate-price/AAPL`)
       const priceSymbolUpdate = await newSymbolPrice.data

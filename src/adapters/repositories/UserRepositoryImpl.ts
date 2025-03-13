@@ -4,11 +4,9 @@ import UserRepository from "../../domain/repositories/UserRepository";
 
 class UserRepositoryImpl extends UserRepository {
   async findByEmail(email: string): Promise<UserInterface | null> {
-		console.log("TCL: UserRepositoryImpl -> email", email)
     return await User.findOne({ email });
   }
   async findByUsername(username: string): Promise<UserInterface | null> {
-		console.log("TCL: UserRepositoryImpl -> username", username)
     return await User.findOne({ username });
   }
 
@@ -18,9 +16,7 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   async stockPurchase(user: UserInterface, currentSymbolPrice: StockType, staleQuantity: number): Promise<UserInterface> {
-    console.log("TCL: UserRepositoryImpl -> user: UserInterface, currentSymbolPrice: StockType, staleQuantity: number", user, currentSymbolPrice, staleQuantity)
     if(user){
-      console.log("TCL: UserRepositoryImpl -> user", user)
       const {holdings} = user
       user.balance -= staleQuantity
 
@@ -30,7 +26,6 @@ class UserRepositoryImpl extends UserRepository {
         holding.symbolUnits += unitsOfSymbolAdquired
         return newHolding
       })
-      console.log("TCL: UserRepositoryImpl -> holdingToAdd", holdingToAdd)
       
       if(!holdingToAdd){
         holdings?.length ? holdings?.push({
@@ -47,12 +42,9 @@ class UserRepositoryImpl extends UserRepository {
             close: currentSymbolPrice.close,
             symbol: currentSymbolPrice.symbol,
           }]
-          console.log("TCL: UserRepositoryImpl -> user", user)
         }
         
-        console.log("TCL: UserRepositoryImpl -> user", user)
         const modifiedUser = User.findOneAndUpdate({_id:user._id}, {...user})
-        console.log("TCL: UserRepositoryImpl -> modifiedUser", modifiedUser)
 
       return user
     }
